@@ -4,7 +4,6 @@ const path = require("path");
 const { InjectManifest } = require("workbox-webpack-plugin");
 
 // TODO: Add and configure workbox plugins for a service worker and manifest file.
-// TODO: Add CSS loaders and babel to webpack.
 
 module.exports = () => {
   return {
@@ -20,22 +19,22 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: "./index.html",
-        title: "Text Cards",
+        title: "J.A.T.E",
       }),
 
       new InjectManifest({
         swSrc: "./src-sw.js",
-        swDest: "./dist/service-worker.js",
+        swDest: "src-sw.js",
       }),
 
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
-        name: "Text Cards",
-        short_name: "Text",
-        description: "Keep track of your text-based notes",
-        background_color: "#3E92CC",
-        theme_color: "#3E92CC",
+        name: "Just Another Text Editor",
+        short_name: "J.A.T.E.",
+        description: "Takes notes with JavaScript syntax highlighting!",
+        background_color: "#225ca3",
+        theme_color: "#225ca3",
         start_url: "./",
         publicPath: "./",
         icons: [
@@ -48,6 +47,7 @@ module.exports = () => {
       }),
     ],
 
+    // TODO: Add CSS loaders and babel to webpack.
     module: {
       rules: [
         {
@@ -57,7 +57,6 @@ module.exports = () => {
         {
           test: /\.m?js$/,
           exclude: /node_modules/,
-          // We use babel-loader in order to use ES6.
           use: {
             loader: "babel-loader",
             options: {
